@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserMaintenance.Entities;
 
-namespace WindowsFormsApp1
+namespace UserMaintenance
 {
     public partial class Form1 : Form
     {
+        BindingList<User> users = new BindingList<User>();
         public Form1()
         {
             InitializeComponent();
