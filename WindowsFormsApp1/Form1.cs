@@ -15,6 +15,9 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            label1.Text = Resource1.FirstName;
+            label2.Text = Resource1.LastName;
+            button1.Text = Resource1.Add;
         }
     }
 }
