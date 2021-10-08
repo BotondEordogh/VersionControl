@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System;
+using System.Drawing;
 
 namespace Week04KWKTJ6
 {
@@ -16,6 +17,7 @@ namespace Week04KWKTJ6
         Excel.Application xlApp;
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
+        string[] headers;
 
         public Form1()
         {
@@ -38,6 +40,7 @@ namespace Week04KWKTJ6
                 xlSheet = xlWB.ActiveSheet;
 
                 CreateTable();
+                FormatTable();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -57,7 +60,7 @@ namespace Week04KWKTJ6
 
         public void CreateTable()
         {
-            string[] headers = new string[]
+            headers = new string[]
             {
                 "Kód",
                 "Eladó",
@@ -115,6 +118,22 @@ namespace Week04KWKTJ6
             ExcelCoordinate += x.ToString();
 
             return ExcelCoordinate;
+        }
+
+        private void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            Excel.Range CompleteTableRange = xlSheet.get_Range(GetCell(1, 1), GetCell(lastRowID, headers.Length));
+            CompleteTableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
     }
 }
