@@ -19,7 +19,7 @@ namespace Week04KWKTJ6
         {
             InitializeComponent();
             LoadData();
-            dataGridView1.Datasource = lakasok;
+            dataGridView1.DataSource = lakasok;
         }
 
         public void LoadData()
