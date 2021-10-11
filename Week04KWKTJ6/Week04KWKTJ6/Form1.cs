@@ -18,6 +18,7 @@ namespace Week04KWKTJ6
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
         string[] headers;
+        object[,] values;
 
         public Form1()
         {
@@ -76,7 +77,7 @@ namespace Week04KWKTJ6
             for (int i = 0; i < headers.Length; i++)           
                 xlSheet.Cells[1, i + 1] = headers[i];
 
-            object[,] values = new object[lakasok.Count, headers.Length];
+            values = new object[lakasok.Count, headers.Length];
 
             int counter = 0;
             int floorColumn = 6; 
@@ -134,6 +135,11 @@ namespace Week04KWKTJ6
             int lastRowID = xlSheet.UsedRange.Rows.Count;
             Excel.Range CompleteTableRange = xlSheet.get_Range(GetCell(1, 1), GetCell(lastRowID, headers.Length));
             CompleteTableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range lastColumn = xlSheet.get_Range(GetCell(2, values.GetLength(1)), GetCell(1 + values.GetLength(0), values.GetLength(1)));
+            lastColumn.Interior.Color = Color.LightGreen;
+            lastColumn.NumberFormat = "###,###.00";
+
         }
     }
 }
