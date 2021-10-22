@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace ValueAtRisk
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+        List<decimal> nyeresegekRendezve;
         public Form1()
         {
             InitializeComponent();
@@ -41,11 +43,11 @@ namespace ValueAtRisk
                 Console.WriteLine(i + " " + ny);
             }
 
-            var nyereségekRendezve = (from x in Nyereségek
+            nyeresegekRendezve = (from x in Nyereségek
                                       orderby x
                                       select x)
                                         .ToList();
-            MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+            MessageBox.Show(nyeresegekRendezve[nyeresegekRendezve.Count() / 5].ToString());
         }
 
         private void CreatePortfolio()
@@ -70,6 +72,28 @@ namespace ValueAtRisk
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+
+            if (sfd.ShowDialog() != DialogResult.OK)           
+                return;
+
+            using (var sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                sw.WriteLine("Időszak;Nereségek");
+                for (int i = 0; i < nyeresegekRendezve.Count(); i++)
+                {
+                    sw.WriteLine(string.Format(
+                        "{0};{1}",
+                        Math.Round((double)i / (double)nyeresegekRendezve.Count(),2),
+                        nyeresegekRendezve[i]
+                        ));
+                }
+            }
         }
     }
 }
