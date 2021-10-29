@@ -18,9 +18,33 @@ namespace MNBsoap
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> currencies = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
+
+            comboBox1.DataSource = currencies;
+            MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            string result = response.GetCurrenciesResult;
+            XmlDocument vxml = new XmlDocument();
+            vxml.LoadXml(result);
+            foreach (XmlElement item in vxml.DocumentElement.FirstChild.ChildNodes)
+            {
+                currencies.Add(item.InnerText);
+            }
+
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            if (comboBox1.SelectedItem == null)
+            {
+                return;
+            }
+            Rates.Clear();
             string xmlstring = Consume();
             LoadXml(xmlstring);
             dataGridView1.DataSource = Rates;
@@ -54,6 +78,10 @@ namespace MNBsoap
                 RateData r = new RateData();
                 r.Date = DateTime.Parse(item.GetAttribute("date"));
                 XmlElement child = (XmlElement)item.FirstChild;
+                if (child == null)
+                {
+                    continue;
+                }
                 r.Currency = child.GetAttribute("curr");
                 r.Value = decimal.Parse(child.InnerText);
                 int unit = int.Parse(child.GetAttribute("unit"));
@@ -69,12 +97,16 @@ namespace MNBsoap
         {
             MNBArfolyamServiceSoapClient mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody();
-            request.currencyNames = "EUR";
-            request.startDate = "2020-01-01";
-            request.endDate = "2020-06-30";
+            request.currencyNames = comboBox1.SelectedItem.ToString(); //"EUR";
+            request.startDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");//"2020-01-01";
+            request.endDate = dateTimePicker2.Value.ToString("yyyy-MM-dd"); //"2020-06-30";
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
             return result;
+        }
+        private void filterChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
