@@ -36,7 +36,7 @@ namespace EvolutionAlgorythm
             // lblGeneration
             // 
             this.lblGeneration.AutoSize = true;
-            this.lblGeneration.Location = new System.Drawing.Point(12, 9);
+            this.lblGeneration.Location = new System.Drawing.Point(297, 9);
             this.lblGeneration.Name = "lblGeneration";
             this.lblGeneration.Size = new System.Drawing.Size(66, 13);
             this.lblGeneration.TabIndex = 0;
@@ -44,12 +44,13 @@ namespace EvolutionAlgorythm
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(12, 25);
+            this.btnStart.Location = new System.Drawing.Point(286, 25);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(90, 23);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Visible = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // Form1

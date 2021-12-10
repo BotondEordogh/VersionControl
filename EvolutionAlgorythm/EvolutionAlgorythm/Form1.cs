@@ -31,7 +31,7 @@ namespace EvolutionAlgorythm
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
 
-            for (int i = 0; i < populationSize; i--)
+            for (int i = 0; i < populationSize; i++)
             {
                 gc.AddPlayer(nbrOfSteps);
             }
