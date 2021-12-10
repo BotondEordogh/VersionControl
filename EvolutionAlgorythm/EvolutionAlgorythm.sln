@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvolutionAlgorythm", "EvolutionAlgorythm\EvolutionAlgorythm.csproj", "{FE634DC3-4869-4BD0-9D47-74FA1FDDF11C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE634DC3-4869-4BD0-9D47-74FA1FDDF11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE634DC3-4869-4BD0-9D47-74FA1FDDF11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE634DC3-4869-4BD0-9D47-74FA1FDDF11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE634DC3-4869-4BD0-9D47-74FA1FDDF11C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {038B1AA3-AEC8-423D-8AD0-1453439EAF99}
+	EndGlobalSection
+EndGlobal
